@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<div layout:fragment="content">
+    <div class="row align-items-center justify-content-md-center m-0" style="height: 25rem;">
+        <div class="col-md-4 border-white h-100 m-0 p-0">
+            <form>
+                <div class="row m-0 mt-4 justify-content-md-center">
+                    <div class="col-8">
+                        <div class="form-floating">
+                            <input type="text" id="userId" name="userId" class="bg-dark form-control text-white">
+                            <label for="userId" class="text-white">ID</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-0 mt-4 justify-content-md-center">
+                    <div class="col-8">
+                        <div class="form-floating">
+                            <input type="password" id="passwd" name="passwd" class="bg-dark form-control text-white">
+                            <label for="passwd" class="text-white">Password</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-0 mt-4 justify-content-md-center">
+                    <div class="col-8">
+                        <button class="btn bg-dark w-100 text-white" id="login_btn">SING IN</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>
