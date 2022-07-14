@@ -9,9 +9,9 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Entity
 public class Reply {
 
     @Id

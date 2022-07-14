@@ -10,9 +10,9 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Getter
-@Setter
-@Entity
+//@Getter
+//@Setter
+//@Entity
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -21,3 +21,21 @@ body {
     padding: 0;
     border: none;
 }
+
+.fade-in {
+    animation-fill-mode: forwards;
+    animation: fadein 2s;
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+}
+.fade-in::after{
+    opacity: 1;
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

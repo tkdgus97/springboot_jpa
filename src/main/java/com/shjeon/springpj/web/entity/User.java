@@ -19,16 +19,16 @@ public class User {
     private int id;
 
     @Column(nullable = false, length = 30)
-    private String username;
+    private String userId;
 
     @Column(nullable = false, length = 100)
     private String password;
 
+    @Column(nullable = false, length = 10)
+    private String name;
+
     @Column(nullable = false, length = 50)
     private String email;
-
-    @Column(length = 20)
-    private String phone;
 
     @Enumerated(EnumType.STRING)
     private RoleType role; //enum 타입

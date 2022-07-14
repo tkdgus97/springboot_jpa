@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<div layout:fragment="content">
+    <div class="row align-items-center justify-content-center m-0" style="height: 40rem;">
+        <div class="col-md-4 bg-dark bg-opacity-75 h-100 m-0 p-0 fade-in border border-white rounded-1">
+            <form action="/signup" method="POST">
+                <div class="row m-0 mt-2 justify-content-center">
+                    <div class="col-8 text-center">
+                        <h1 class="text-white fw-bold">Welcome!</h1>
+                    </div>
+                </div>
+                <div class="row m-0 justify-content-center">
+                    <div class="col-8 p-3">
+                        <div class="form-floating">
+                            <input type="text" id="userId" name="userId" class="bg-dark form-control text-white">
+                            <label for="userId" class="text-white">ID</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-0 justify-content-center">
+                    <div class="col-8 p-3">
+                        <div class="form-floating">
+                            <input type="password" id="password" name="password" class="bg-dark form-control text-white">
+                            <label for="password" class="text-white">Password</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-0 justify-content-center">
+                    <div class="col-8 p-3">
+                        <div class="form-floating">
+                            <input type="text" id="name" name="name" class="bg-dark form-control text-white">
+                            <label for="name" class="text-white">Name</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-0 justify-content-center">
+                    <div class="col-8 p-3">
+                        <div class="form-floating">
+                            <input type="email" id="email" name="email" class="bg-dark form-control text-white">
+                            <label for="email" class="text-white">Email</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-0 mt-4 justify-content-center">
+                    <div class="col-6">
+                        <button type="submit" class="btn bg-dark w-100 text-white" id="signup_submit">SING UP</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>
