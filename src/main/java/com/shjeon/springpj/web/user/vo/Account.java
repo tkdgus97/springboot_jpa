@@ -1,12 +1,15 @@
 package com.shjeon.springpj.web.user.vo;
 
 import com.shjeon.springpj.web.entity.User;
+import lombok.Data;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Getter
 public class Account implements UserDetails {
 
     User user;

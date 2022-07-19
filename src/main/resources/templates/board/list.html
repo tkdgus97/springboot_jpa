@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/boardDefault.html}">
+
+<div layout:fragment="content">
+    <div class="row align-items-center justify-content-center m-0 mt-5">
+        <div class="col border-bottom border-secondary p-0">
+            <h1 class="fw-bold">자유게시판</h1>
+        </div>
+        <div class="col-12 mt-3">
+            <table class="table table-hover text-center">
+                <tr>
+                    <th>No</th>
+                    <th>제목</th>
+                    <th>글쓴이</th>
+                    <th>작성일</th>
+                    <th>조회수</th>
+                </tr>
+                <tr th:each="board : ${boardList.content}">
+                    <td th:text="${board.boardId}"></td>
+                    <td th:text="${board.title}"></td>
+                    <td th:text="${board.user.name}"></td>
+                    <td th:text="${#strings.substring(board.regDate,0,19)}"></td>
+                    <td th:text="${board.count}"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-10 mt-3">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/html"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+
+<th:block th:insert="layout/head :: headFrag"></th:block>
+<body>
+<header th:replace="layout/header :: headerFrag" id="header"></header>
+<!-- [content] 영역 시작 -->
+<div layout:fragment="content" id="boardContent" class="container justify-content-center"></div>
+</body>
+</html>

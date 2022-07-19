@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/boardDefault.html}">
+<head>
+    <script src="/ckeditor5/build/ckeditor.js"></script>
+    <script src="/ckeditor5/build/uploadAdapter.js"></script>
+    <script src="/js/board.js" type="module"></script>
+    <style>
+        .ck-editor__editable{
+            min-height: 500px;
+        }
+
+    </style>
+</head>
+<div layout:fragment="content">
+    <div class="row align-items-center justify-content-center m-0 mt-3" style="height: 40rem;">
+        <form id="boardForm" action="/board/add" method="post">
+            <div class="row m-0 mt-2 justify-content-center">
+                <div class="col-12 border-bottom border-secondary p-0">
+                    <input type="text" id="title" name="title" class="form-control border-0" style="font-size: 25px;" placeholder="제목을 입력하세요">
+                </div>
+            </div>
+            <div class="row m-0 mt-4 justify-content-center">
+                <div class="col-12 p-0">
+                    <textarea id="editor" name="content" class="border-0"></textarea>
+                </div>
+            </div>
+            <div class="row m-0 mt-4 justify-content-center">
+                <div class="col-2 p-0 text-center">
+                    <button type="submit" id="save" class="btn btn-dark rounded-pill w-50 h-100">저장</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function () {
+            var myClassEditor;
+            ClassicEditor
+                .create(document.querySelector("#editor"), {
+                    language: "ko",
+                    // 폰트 종류
+                    fontFamily: {
+                        options: [
+                            'default', '궁서체', '나눔고딕/나눔고딕', 'Nanum Gothic', 'ng', 'sans-serif',
+                            'Ubuntu', 'monospace', 'Arial', 'Courier'
+                        ]
+                    },
+                    fontSize: {
+                        options: [8, 10, 12, 'default', 14, 16, 20, 25, 30, 35, 40]
+                    },
+                    resizeOptions: [
+                        {
+                            name: 'resizeImage:original',
+                            value: null,
+                            label: 'Original'
+                        },
+                        {
+                            name: 'resizeImage:40',
+                            value: '40',
+                            label: '40%'
+                        },
+                        {
+                            name: 'resizeImage:60',
+                            value: '60',
+                            label: '60%'
+                        }
+                    ],
+                    extraPlugins: [CustomUploadAdapter]
+                })
+                .then(editor => {
+                    myClassEditor = editor;
+                    // console.log(myClassEditor.isReadOnly);
+                    // myClassEditor.enableReadOnlyMode("#editor");
+                    // console.log(myClassEditor.isReadOnly)
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+
+            function CustomUploadAdapter(editor) {
+                editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                    return new UploadAdapter(loader);
+                }
+            }
+
+            // $("#save").click(function () {
+            //     console.log(myClassEditor.getData());
+            //     let data = {
+            //         "title": $("#title").val(),
+            //         "content": myClassEditor.getData()
+            //     };
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "/board/add",
+            //         data: data,
+            //         success: function () {
+            //             alert("성공")
+            //         },
+            //         error: function () {
+            //             alert("실패")
+            //         }
+            //     })
+            // })
+        })
+    </script>
+</div>
+</html>

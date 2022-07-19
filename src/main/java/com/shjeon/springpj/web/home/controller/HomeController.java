@@ -46,6 +46,7 @@ public class HomeController {
         return mav;
     }
 
+
     @GetMapping("/user/{id}")
     public User getUserInfo(@PathVariable int id){
         User user = userRepository.findById(id).orElseThrow(() -> {

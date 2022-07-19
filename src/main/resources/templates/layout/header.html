@@ -11,7 +11,7 @@
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 text-white">랭킹</a></li>
-                <li sec:authorize="isAuthenticated()"><a href="#" class="nav-link px-2 text-white">자유게시판</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/board/list" class="nav-link px-2 text-white">자유게시판</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="#" class="nav-link px-2 text-white">문의</a></li>
             </ul>
 
@@ -20,8 +20,14 @@
                 <button type="button" class="btn btn-warning" id="signup_btn">Sign-up</button>
             </div>
 
-            <div class="text-end" sec:authorize="isAuthenticated()">
-                <button type="button" class="btn btn-warning" id="logout_btn">Logout</button>
+            <div class="text-end dropdown" sec:authorize="isAuthenticated()" style="width: 2.5rem; height: 2.5rem;">
+                <button class="btn dropdown-toggle p-0 w-100 h-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/image/user.svg" class="img-fluid">
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">계정 정보</a></li>
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
             </div>
         </div>
     </div>
