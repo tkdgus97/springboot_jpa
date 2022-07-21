@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -36,7 +35,6 @@ public class boardController {
     @GetMapping("/list")
     public ModelAndView boardList(ModelAndView mav, @PageableDefault(size = 3, sort = "boardId", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Board> boardList = boardService.boardListAll(pageable);
-        System.out.println(boardList.getTotalPages());
         mav.addObject("boardList", boardList);
         mav.setViewName("board/list");
         return mav;
@@ -49,9 +47,9 @@ public class boardController {
     }
 
     @PostMapping("/add")
-    public ModelAndView boardAdd(Board board, ModelAndView mav, @AuthenticationPrincipal Account user) {
+    public String boardAdd(Board board, ModelAndView mav, @AuthenticationPrincipal Account user) {
         boardService.boardAdd(board, user);
-        return mav;
+        return "redirect:/board/list";
     }
 
     @PostMapping(value = "/upload/image")

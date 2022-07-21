@@ -10,5 +10,13 @@ $(document).ready(function (){
     $("#logout_btn").click(function (){
         location.href = "/logout";
     })
+
+    $("#board-add").click(function (){
+        location.href="/board/add";
+    })
+
+    $("#game-start").click(function (){
+        location.href="/game/selectCharacter";
+    })
 })
 

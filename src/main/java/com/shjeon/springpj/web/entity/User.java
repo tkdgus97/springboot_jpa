@@ -2,10 +2,10 @@ package com.shjeon.springpj.web.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -29,6 +29,9 @@ public class User {
 
     @Column(nullable = false, length = 50)
     private String email;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    List<CharacterInfo> characterInfoList;
 
     @Enumerated(EnumType.STRING)
     private RoleType role; //enum 타입

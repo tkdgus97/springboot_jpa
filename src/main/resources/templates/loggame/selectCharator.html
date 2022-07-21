@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/default}">
+<div layout:fragment="content">
+    <div class="row align-items-center w-50 d-flex flex-column bg-dark align-self-center justify-content-center border border-white rounded-1 m-0"
+         style="height: 40rem; opacity: 0.8">
+        <div class="row justify-content-center" sec:authorize="isAuthenticated()">
+            <div th:each="charator : ${characterList}" class="col-4 p-0 d-flex flex-column text-center border border-dark border-2 bg-light bg-opacity-75 align-items-center justify-content-center">
+                <div class="row" th:if="charator != null">
+                    <div class="col">
+                        <span th:text="${charator.unitName}"></span>
+                    </div>
+                </div>
+                <span th:if="charator == null" class="align-middle">비어 있음</span>
+            </div>
+        </div>
+        <div class="row justify-content-center" sec:authorize="isAnonymous()">
+            <div class="col-4 p-0 d-flex flex-column text-center border border-dark border-2 bg-light bg-opacity-75 align-items-center justify-content-center" style="height: 8rem;">
+                <span class="align-middle">비어 있음</span>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

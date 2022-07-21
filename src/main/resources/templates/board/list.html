@@ -18,8 +18,8 @@
                     <th>작성일</th>
                     <th>조회수</th>
                 </tr>
-                <tr th:each="board : ${boardList.content}">
-                    <td th:text="${board.boardId}"></td>
+                <tr th:each="board,i : ${boardList.content}">
+                    <td class="contentId" th:id="${board.boardId}" th:text="${i.index+1}"></td>
                     <td th:text="${board.title}"></td>
                     <td th:text="${board.user.name}"></td>
                     <td th:text="${#strings.substring(board.regDate,0,19)}"></td>
@@ -27,22 +27,33 @@
                 </tr>
             </table>
         </div>
-        <div class="col-10 mt-3">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        <div class="col-12 mt-3">
+            <ul class="pagination justify-content-center">
+                <li th:if="${boardList.first}" class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li th:if="${!boardList.first}" class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li th:if="${boardList.last}" class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li th:if="${!boardList.last}" class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="align-self-end">
+                    <button class="btn btn-dark text-white" type="button" id="board-add">글쓰기</button>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

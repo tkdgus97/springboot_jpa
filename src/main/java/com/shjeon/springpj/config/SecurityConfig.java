@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/board/**").authenticated()
                 .antMatchers("/admin/**").authenticated()
-                .antMatchers("/**","/css/**", "/js/**", "/image/**/**", "/bootstrap/**","/ckeditor5/**/**","/img/**").permitAll()
+                .antMatchers("/**","/css/**", "/js/**", "/image/**/**", "/bootstrap/**","/ckeditor5/**/**","/img/**", "/game/**").permitAll()
             .and()
                 .formLogin()
                 .loginPage("/login")
