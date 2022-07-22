@@ -55,3 +55,7 @@ body {
         opacity: 1;
     }
 }
+
+.job-img {
+    filter: opacity(.5) drop-shadow(0 0 0 white);
+}

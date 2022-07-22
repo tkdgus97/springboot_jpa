@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/default}">
+<div layout:fragment="content">
+    <div class="row align-items-center w-50 d-flex flex-column bg-dark align-self-center justify-content-center border border-white rounded-1 m-0"
+         style="height: 40rem; opacity: 0.8">
+        <div class="row justify-content-center p-4" >
+            <div class="col-10 justify-content-center">
+                <form action="create" method="post">
+                    <div class="row m-0 justify-content-center">
+                        <div class="col-6 p-3">
+                            <input type="text" id="name" name="name" class="bg-dark form-control text-white" placeholder="캐릭터 이름">
+                        </div>
+                    </div>
+                    <div class="row m-0 mt-5 justify-content-center">
+                        <div class="col-6 p-3 text-center">
+                            <span class="text-white fw-bold" style="font-size: 1.2rem;">직업</span>
+                        </div>
+                    </div>
+                    <div class="row m-0 justify-content-center">
+                        <div class="col-3 text-center">
+                            <button class="select-job btn text-white" type="button" id="warrior"><img src="/image/warrior.png" class="img-fluid job-img"></button>
+                        </div>
+                        <div class="col-3 text-center">
+                            <button class="select-job btn text-white"  type="button" id="bow"><img src="/image/bow.png" class="img-fluid job-img"></button>
+                        </div>
+                        <div class="col-3 text-center">
+                            <button class="select-job btn text-white" type="button" id="wizard"><img src="/image/wizard.png" class="img-fluid job-img"></button>
+                        </div>
+                    </div>
+                    <div class="row m-0 mt-3 justify-content-center ">
+                        <div class="col-2 text-center border-bottom">
+                            <input type="text" id="job" name="job" class="form-control p-0 text-white bg-dark border-0 text-center" placeholder="선택 직업">
+                        </div>
+                    </div>
+                    <div class="row m-0 mt-5 justify-content-center ">
+                        <div class="col-2 text-center">
+                            <button type="submit" class="btn text-white">완료</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
