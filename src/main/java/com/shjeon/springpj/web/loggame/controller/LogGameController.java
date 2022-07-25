@@ -1,5 +1,6 @@
 package com.shjeon.springpj.web.loggame.controller;
 
+import com.shjeon.springpj.web.entity.TempCharactor;
 import com.shjeon.springpj.web.loggame.vo.unit.Human;
 import com.shjeon.springpj.web.entity.CharacterInfo;
 import com.shjeon.springpj.web.loggame.service.LogGameService;
@@ -26,45 +27,53 @@ public class LogGameController {
     @Autowired
     LogGameService logGameService;
 
+    private final int createLimitCount = 3;
+
     @Transactional
     @GetMapping("/character")
-    public ModelAndView selectCharacter(@AuthenticationPrincipal Account user, ModelAndView mav){
+    public ModelAndView selectCharacter(@AuthenticationPrincipal Account user, ModelAndView mav,HttpServletRequest req ){
         if (user != null){
 //            List<CharacterInfo> characterInfoList = logGameService.getCharactorInfo(user.getUser().getId());
             List<CharacterInfo> characterInfoList = user.getUser().getCharacterInfoList();
-            int listSize = characterInfoList.size();
-            if (listSize <3) {
-                for (int i=listSize; i <3; i++) {
-                    CharacterInfo unit = null;
-                    characterInfoList.add(unit);
-                }
-            }
+
             mav.addObject("characterList", characterInfoList);
+        } else {
+            Cookie[] cookies = req.getCookies();
+            if (cookies != null){
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("TEMPID")){
+                        TempCharactor charactor = logGameService.getTempCharator(cookie.getValue());
+                        mav.addObject("tempCharacter", charactor);
+                    }
+                }
+            } else {
+                mav.addObject("tempCharacter", null);
+            }
         }
-        mav.setViewName("loggame/selectCharator");
+        mav.setViewName("loggame/selectCharacter");
         return mav;
     }
 
     @GetMapping("/create")
     public ModelAndView createPage(ModelAndView mav) {
-
         mav.setViewName("loggame/create");
         return mav;
     }
 
     @PostMapping("/create")
-    public ModelAndView create(ModelAndView mav, HttpServletRequest req, HttpServletResponse resp, @AuthenticationPrincipal Account user, String name, String job) {
-        logGameService.createUnit(req,resp,user, name, job);
-        mav.setViewName("/index");
-        return mav;
+    public String create(HttpServletResponse resp, @AuthenticationPrincipal Account user, String name, String job) {
+        logGameService.createUnit(resp,user, name, job);
+        return "redirect:/";
+    }
+
+    @PostMapping("/remove")
+    public @ResponseBody void remove(@AuthenticationPrincipal Account user, int idx){
+        logGameService.deleteUnit(user, idx);
     }
 
     @GetMapping("/test")
-    public @ResponseBody String test(){
-        Human unit = Human.builder()
-                .defend(40).build();
-
-        unit.upGuard();
+    public @ResponseBody String test(@AuthenticationPrincipal Account user) {
+        System.out.println(user.getUser().getCharacterInfoList().size());
         return "test";
     }
 }

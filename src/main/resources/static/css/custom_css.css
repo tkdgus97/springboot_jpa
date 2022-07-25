@@ -59,3 +59,11 @@ body {
 .job-img {
     filter: opacity(.5) drop-shadow(0 0 0 white);
 }
+
+.div-btn {
+    box-shadow: 3px 3px 3px 3px black;
+    transition-duration: 0.8s;
+}
+.div-btn:active {
+    box-shadow: none;
+}

@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Data
@@ -26,6 +23,6 @@ public class TempUser {
     @CreationTimestamp
     private Timestamp regDate;
 
-    @OneToOne(mappedBy = "tempUser")
+    @OneToOne(mappedBy = "tempUser" , cascade = CascadeType.ALL)
     private TempCharactor tempCharactor;
 }

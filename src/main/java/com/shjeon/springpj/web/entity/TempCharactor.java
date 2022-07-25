@@ -17,7 +17,8 @@ import java.sql.Timestamp;
 @Entity
 public class TempCharactor {
     @Id
-    private Long idx;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idx;
 
     @Column
     private String name;

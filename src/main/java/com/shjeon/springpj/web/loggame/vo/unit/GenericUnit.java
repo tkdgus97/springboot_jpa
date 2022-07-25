@@ -62,7 +62,6 @@ public abstract class GenericUnit {
 
     }
 
-
     public GenericUnit(int level, int hp, int mp, int attack, double attackSpeed, int defend, int maxHp, int maxMp) {
         this.level = level;
         this.hp = hp;

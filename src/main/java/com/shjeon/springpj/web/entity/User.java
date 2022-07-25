@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -30,12 +31,17 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    List<CharacterInfo> characterInfoList;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
+    List<CharacterInfo> characterInfoList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private RoleType role; //enum 타입
 
     @CreationTimestamp
     private Timestamp regDate;
+
+    public void addCharacterInfo(CharacterInfo character){
+        this.characterInfoList.add(character);
+    }
+    public void removeCharacterInfo(CharacterInfo character) { this.characterInfoList.remove(character); }
 }

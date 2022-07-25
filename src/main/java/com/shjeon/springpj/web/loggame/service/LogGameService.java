@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,12 +35,13 @@ public class LogGameService {
     TempUserRepository tempUserRepository;
 
     @Transactional
-    public void createUnit(HttpServletRequest req, HttpServletResponse resp, @AuthenticationPrincipal Account user, String name, String job){
+    public void createUnit(HttpServletResponse resp, @AuthenticationPrincipal Account user, String name, String job){
         ModelMapper modelMapper = new ModelMapper();
         GenericUnit unit = null;
-        TempCharactor charactor = new TempCharactor();
+
         if (job.equals("전사")){
             unit = new Human();
+            unit.setJob("전사");
         } else if(job.equals("궁수")) {
             System.out.println("궁수");
         } else if(job.equals("마법사")) {
@@ -48,22 +50,24 @@ public class LogGameService {
 
         if (unit != null){
             unit.setName(name);
-            unit.setJob("전사");
         }
-
 
         if (user == null) {
             TempUser tempUser = tempUserCreate(resp);
-            charactor = modelMapper.map(unit, TempCharactor.class);
-            System.out.println(charactor.getJob());
+            TempCharactor charactor = modelMapper.map(unit, TempCharactor.class);
+
+            tempUser.setTempCharactor(charactor);
+            charactor.setTempUser(tempUser);
+
+            tempUserRepository.save(tempUser);
         }
         else {
-            Cookie[] cookie = req.getCookies();
-            for (Cookie cookie1: cookie) {
-                System.out.println(cookie1.getName());
-                System.out.println(cookie1.getValue());
-            };
-            System.out.println("회원");
+            CharacterInfo characterInfo = modelMapper.map(unit, CharacterInfo.class);
+            characterInfo.setUser(user.getUser());
+
+            user.getUser().addCharacterInfo(characterInfo);
+
+            logGameRepository.save(characterInfo);
         }
     }
 
@@ -81,6 +85,30 @@ public class LogGameService {
 
         resp.addCookie(cookie);
         return tempUser;
+    }
+
+    public TempCharactor getTempCharator(String tempId){
+        return tempUserRepository.getById(tempId).getTempCharactor();
+    }
+
+    @Transactional
+    public void deleteUnit(@AuthenticationPrincipal Account user, int idx){
+        if (user != null){
+            Iterator<CharacterInfo> itrList = user.getUser().getCharacterInfoList().iterator();
+
+            System.out.println("==========="+idx);
+
+            logGameRepository.deleteById(idx);
+
+//            while (itrList.hasNext()){
+//                if (itrList.next().getIdx() == idx){
+//                    user.getUser().removeCharacterInfo(itrList.next());
+//                }
+//            }
+        } else {
+            System.out.println("----------------------------------------");
+            tempUserLogGameRepository.deleteById(idx);
+        }
     }
 
 }

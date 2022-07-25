@@ -59,8 +59,6 @@ public class HomeController {
     @PostMapping(value = "/signup", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public void memeberJoin(User user, HttpServletRequest req, HttpServletResponse resp) throws IOException {
         user.setRole(RoleType.USER);
-        log.info(user.getUserId());
-        log.info(user.getPassword());
         String encodePassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodePassword);
         userRepository.save(user);

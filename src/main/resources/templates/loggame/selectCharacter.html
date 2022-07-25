@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/default}">
+<div layout:fragment="content">
+    <div class="row align-items-center w-50 d-flex flex-column bg-dark align-self-center justify-content-center border border-white rounded-1 m-0"
+         style="height: 40rem; opacity: 0.8">
+        <div class="row justify-content-center p-2 mb-2">
+            <div class="col-6">
+                <h2 class="text-white text-center fw-bold">캐릭터 선택</h2>
+            </div>
+        </div>
+        <div th:if="${characterList.size() ge 1}" th:each="i : ${#numbers.sequence(0, characterList.size() - 1)}" class="row justify-content-center p-4" sec:authorize="isAuthenticated()">
+            <div class="col-4 p-0 d-flex flex-column text-center border border-dark border-2 bg-light bg-opacity-75 align-items-center justify-content-center div-btn" style="height: 6rem;">
+                <div class="row unit-box w-100 h-100 d-flex flex-column unit-box justify-content-center align-items-center" th:id="${characterList.get(i).idx}">
+                    <div class="col-4">
+                        <span th:text="${characterList.get(i).name}"></span>
+                    </div>
+                    <div class="col-10 text-center">
+                        직업  : <span th:text="${characterList.get(i).job}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:each="i : ${#numbers.sequence(characterList.size(), 2)}" class="row justify-content-center p-4" sec:authorize="isAuthenticated()">
+            <div class="col-4 p-0 d-flex flex-column text-center border border-dark border-2 bg-light bg-opacity-75 align-items-center justify-content-center div-btn" style="height: 6rem;">
+                <button class="align-middle btn text-black create-unit">캐릭터 생성</button>
+            </div>
+        </div>
+        <div class="row justify-content-center" sec:authorize="isAnonymous()">
+            <div class="col-4 p-0 d-flex flex-column text-center border border-dark border-2 bg-light bg-opacity-75 align-items-center justify-content-center div-btn" style="height: 6rem;">
+                <div class="row unit-box w-100 h-100 d-flex flex-column justify-content-center align-items-center div-btn" th:if="${tempCharacter} != null" th:id="${tempCharacter.idx}">
+                    <div class="col-4">
+                        <span th:text="${tempCharacter.name}"></span>
+                    </div>
+                    <div class="col-10 text-center">
+                        직업  : <span th:text="${tempCharacter.job}"></span>
+                    </div>
+                </div>
+                <button th:if="${tempCharacter} == null" class="align-middle btn text-black create-unit">캐릭터 생성</button>
+            </div>
+        </div>
+        <div class="row justify-content-center p-2 mb-2 mt-2" style="display: none;" id="choice-btn">
+            <input type="hidden" id="select-value">
+            <div class="col-2">
+                <button class="btn text-danger w-100" id="start">게임 시작</button>
+            </div>
+            <div class="col-2">
+                <button class="btn text-danger w-100" id="unit-delete">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

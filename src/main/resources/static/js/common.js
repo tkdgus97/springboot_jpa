@@ -32,5 +32,33 @@ $(document).ready(function (){
             $("#job").val("마법사");
         }
     })
+
+    $(".unit-box").click((e) => {
+        $("#select-value").val(e.currentTarget.id);
+        $("#choice-btn").show();
+    })
+
+    $("#start").click(()=>{
+
+    })
+
+    $("#unit-delete").click(() => {
+        if (confirm("삭제 시 복구가 불가능 합니다. \n 삭제하시겠습니까?")) {
+            let data = {
+                idx : $("#select-value").val()
+            }
+            $.ajax({
+                url: "/game/remove",
+                type : "POST",
+                data : data,
+                success : () => {
+                    location.href = "/"
+                },
+                error : () => {
+                    alert("삭제 실패");
+                }
+            })
+        }
+    })
 })
 
