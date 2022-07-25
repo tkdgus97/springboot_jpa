@@ -1,7 +1,7 @@
 package com.shjeon.springpj.web.home.controller;
 
-import com.shjeon.springpj.web.entity.RoleType;
-import com.shjeon.springpj.web.entity.User;
+import com.shjeon.springpj.entity.RoleType;
+import com.shjeon.springpj.entity.User;
 import com.shjeon.springpj.web.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 
 @Slf4j
@@ -44,15 +43,6 @@ public class HomeController {
     public ModelAndView singUp(ModelAndView mav){
         mav.setViewName("signUp");
         return mav;
-    }
-
-
-    @GetMapping("/user/{id}")
-    public User getUserInfo(@PathVariable int id){
-        User user = userRepository.findById(id).orElseThrow(() -> {
-            return new IllegalArgumentException("해당 유저 없음");
-        });
-        return user;
     }
 
 

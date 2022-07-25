@@ -1,6 +1,6 @@
 package com.shjeon.springpj.web.user.service;
 
-import com.shjeon.springpj.web.entity.User;
+import com.shjeon.springpj.entity.User;
 import com.shjeon.springpj.web.user.repository.UserRepository;
 import com.shjeon.springpj.web.user.vo.Account;
 import lombok.extern.slf4j.Slf4j;
@@ -9,8 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Slf4j
 @Service

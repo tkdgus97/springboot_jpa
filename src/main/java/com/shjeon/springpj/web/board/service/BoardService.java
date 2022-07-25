@@ -1,7 +1,7 @@
 package com.shjeon.springpj.web.board.service;
 
 import com.shjeon.springpj.web.board.repository.BoardRepository;
-import com.shjeon.springpj.web.entity.Board;
+import com.shjeon.springpj.entity.Board;
 import com.shjeon.springpj.web.user.vo.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

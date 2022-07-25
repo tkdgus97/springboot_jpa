@@ -1,7 +1,6 @@
 package com.shjeon.springpj.web.user.vo;
 
-import com.shjeon.springpj.web.entity.User;
-import lombok.Data;
+import com.shjeon.springpj.entity.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,4 +1,4 @@
-package com.shjeon.springpj.web.entity;
+package com.shjeon.springpj.entity;
 
 public enum RoleType {
     USER, ADMIN

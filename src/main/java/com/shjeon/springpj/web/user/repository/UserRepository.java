@@ -1,6 +1,6 @@
 package com.shjeon.springpj.web.user.repository;
 
-import com.shjeon.springpj.web.entity.User;
+import com.shjeon.springpj.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

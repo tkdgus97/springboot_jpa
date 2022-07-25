@@ -1,16 +1,21 @@
-package com.shjeon.springpj.web.entity;
+package com.shjeon.springpj.entity;
 
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
-public class CharacterInfo {
-
+public class TempCharactor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idx;
@@ -48,15 +53,11 @@ public class CharacterInfo {
     @Column(nullable = false)
     private int money;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private User user;
+    @OneToOne
+    @JoinColumn(name = "tempId")
+    private TempUser tempUser;
 
     @CreationTimestamp
     private Timestamp regDate;
 
-    @Builder
-    public CharacterInfo() {
-
-    }
 }

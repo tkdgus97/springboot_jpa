@@ -39,25 +39,27 @@ $(document).ready(function (){
     })
 
     $("#start").click(()=>{
-
+        let idx = $("#select-value").val();
+        location.href = "/game/start/"+idx;
     })
 
     $("#unit-delete").click(() => {
         if (confirm("삭제 시 복구가 불가능 합니다. \n 삭제하시겠습니까?")) {
             let data = {
                 idx : $("#select-value").val()
-            }
+            };
+
             $.ajax({
                 url: "/game/remove",
                 type : "POST",
                 data : data,
                 success : () => {
-                    location.href = "/"
+                    location.href = "/";
                 },
                 error : () => {
                     alert("삭제 실패");
                 }
-            })
+            });
         }
     })
 })

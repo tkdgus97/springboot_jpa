@@ -9,6 +9,9 @@ import java.util.TimerTask;
 
 @ToString
 @SuperBuilder
+@AllArgsConstructor
+@Getter
+@Setter
 @Data
 public abstract class GenericUnit {
     protected String name;

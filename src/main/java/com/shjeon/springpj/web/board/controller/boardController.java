@@ -1,7 +1,7 @@
 package com.shjeon.springpj.web.board.controller;
 
 import com.shjeon.springpj.web.board.service.BoardService;
-import com.shjeon.springpj.web.entity.Board;
+import com.shjeon.springpj.entity.Board;
 import com.shjeon.springpj.web.user.vo.Account;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.shjeon.springpj.web.entity;
+package com.shjeon.springpj.entity;
 
 
 import lombok.Getter;
@@ -8,7 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Getter
 @Setter

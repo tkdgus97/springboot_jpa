@@ -1,8 +1,7 @@
-package com.shjeon.springpj.web.entity;
+package com.shjeon.springpj.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
