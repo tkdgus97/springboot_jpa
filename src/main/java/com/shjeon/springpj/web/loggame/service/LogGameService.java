@@ -3,13 +3,14 @@ package com.shjeon.springpj.web.loggame.service;
 import com.shjeon.springpj.web.entity.CharacterInfo;
 import com.shjeon.springpj.web.entity.TempCharactor;
 import com.shjeon.springpj.web.entity.TempUser;
+import com.shjeon.springpj.web.entity.User;
 import com.shjeon.springpj.web.loggame.repository.LogGameRepository;
 import com.shjeon.springpj.web.loggame.repository.TempUserLogGameRepository;
 import com.shjeon.springpj.web.loggame.vo.unit.GenericUnit;
 import com.shjeon.springpj.web.loggame.vo.unit.Human;
 import com.shjeon.springpj.web.user.repository.TempUserRepository;
+import com.shjeon.springpj.web.user.repository.UserRepository;
 import com.shjeon.springpj.web.user.vo.Account;
-import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,16 +18,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class LogGameService {
     @Autowired
     LogGameRepository logGameRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     TempUserLogGameRepository tempUserLogGameRepository;
@@ -63,12 +67,17 @@ public class LogGameService {
         }
         else {
             CharacterInfo characterInfo = modelMapper.map(unit, CharacterInfo.class);
-            characterInfo.setUser(user.getUser());
 
-            user.getUser().addCharacterInfo(characterInfo);
+            User userInfo = userRepository.findById(user.getUser().getId()).orElse(null);
 
+            userInfo.addCharacterInfo(characterInfo);
             logGameRepository.save(characterInfo);
         }
+    }
+
+    public List<CharacterInfo> getUnits(int idx){
+        List<CharacterInfo> unitList = logGameRepository.findByUserId(idx);
+        return unitList;
     }
 
     public TempUser tempUserCreate(HttpServletResponse resp){
@@ -94,11 +103,14 @@ public class LogGameService {
     @Transactional
     public void deleteUnit(@AuthenticationPrincipal Account user, int idx){
         if (user != null){
-            Iterator<CharacterInfo> itrList = user.getUser().getCharacterInfoList().iterator();
+            User userInfo = userRepository.findById(user.getUser().getId()).orElse(null);
 
-            System.out.println("==========="+idx);
+            CharacterInfo characterInfo = logGameRepository.findById(idx).orElseThrow(() -> {
+                return new IllegalArgumentException("해당 유닛 없음");
+            });
 
-            logGameRepository.deleteById(idx);
+            userInfo.removeCharacterInfo(characterInfo);
+            logGameRepository.delete(characterInfo);
 
 //            while (itrList.hasNext()){
 //                if (itrList.next().getIdx() == idx){
@@ -106,7 +118,7 @@ public class LogGameService {
 //                }
 //            }
         } else {
-            System.out.println("----------------------------------------");
+
             tempUserLogGameRepository.deleteById(idx);
         }
     }

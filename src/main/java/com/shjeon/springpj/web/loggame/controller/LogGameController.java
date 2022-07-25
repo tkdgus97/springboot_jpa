@@ -8,6 +8,7 @@ import com.shjeon.springpj.web.user.vo.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RequestMapping("/game")
@@ -34,7 +34,7 @@ public class LogGameController {
     public ModelAndView selectCharacter(@AuthenticationPrincipal Account user, ModelAndView mav,HttpServletRequest req ){
         if (user != null){
 //            List<CharacterInfo> characterInfoList = logGameService.getCharactorInfo(user.getUser().getId());
-            List<CharacterInfo> characterInfoList = user.getUser().getCharacterInfoList();
+            List<CharacterInfo> characterInfoList = logGameService.getUnits(user.getUser().getId());
 
             mav.addObject("characterList", characterInfoList);
         } else {

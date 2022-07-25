@@ -2,6 +2,7 @@ package com.shjeon.springpj.web.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -31,7 +32,7 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "user")
     List<CharacterInfo> characterInfoList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
@@ -41,7 +42,12 @@ public class User {
     private Timestamp regDate;
 
     public void addCharacterInfo(CharacterInfo character){
-        this.characterInfoList.add(character);
+        List<CharacterInfo> unitList = this.getCharacterInfoList();
+        character.setUser(this);
+        unitList.add(character);
     }
-    public void removeCharacterInfo(CharacterInfo character) { this.characterInfoList.remove(character); }
+    public void removeCharacterInfo(CharacterInfo character) {
+        character.setUser(null);
+        this.characterInfoList.remove(character);
+    }
 }
