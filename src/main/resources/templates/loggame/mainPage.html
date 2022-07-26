@@ -10,11 +10,72 @@
         <div class="col-12" style="height: 10%;">
             <button class="btn text-white">◀캐릭터 선택</button>
         </div>
-        <div class="col-12 p-0" style="height: 70%;">
-
+        <div class="col-8 p-0 d-flex flex-column justify-content-center" style="height: 70%;">
+            <div class="row w-100 h-50 p-0 text-white">
+                <div class="col-4 p-0 pointer">
+                    <div class="row w-100 m-0" style="height: 85%;">
+                        <img src="/image/dungeon.svg" class="img-fluid">
+                    </div>
+                    <div class="row text-center">
+                        <span>던전</span>
+                    </div>
+                </div>
+                <div class="col-4 p-0 pointer">
+                    <div class="row w-100 m-0" style="height: 85%;">
+                        <img src="/image/store.svg" class="img-fluid">
+                    </div>
+                    <div class="row text-center">
+                        <span>상점</span>
+                    </div>
+                </div>
+                <div class="col-4 p-0 pointer">
+                    <div class="row w-100 m-0 " style="height: 85%;">
+                        <img src="/image/hammer.svg" class="img-fluid">
+                    </div>
+                    <div class="row text-center">
+                        <span>강화</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12" style="height: 20%;">
-            <span th:text="${unit.name}"></span>
+        <div class="col-8" style="height: 20%;">
+            <div class="row text-white">
+                <div class="col-10">
+                    <span th:text="${unit.name}"></span>
+                </div>
+            </div>
+            <div class="row text-white text-center">
+                <div class="col-6">
+                    <span>Lv </span><span th:text="${unit.level}"></span>
+                </div>
+                <div class="col-6">
+                    <span>직업 : </span><span th:text="${unit.job}"></span>
+                </div>
+            </div>
+            <div class="row text-white text-center">
+                <div class="col-6">
+                    <span>HP : </span><span th:text="${unit.hp}"></span>
+                </div>
+                <div class="col-6">
+                    <span>MP : </span><span th:text="${unit.mp}"></span>
+                </div>
+            </div>
+            <div class="row text-white text-center">
+                <div class="col-6">
+                    <span>공격력 : </span><span th:text="${unit.attack}"></span>
+                </div>
+                <div class="col-6">
+                    <span>공격속도 : </span><span th:text="${unit.attackSpeed}"></span>
+                </div>
+            </div>
+            <div class="row text-white text-center">
+                <div class="col-6">
+                    <span>방어력 : </span><span th:text="${unit.defend}"></span>
+                </div>
+                <div class="col-6">
+                    <span>돈 : </span><span th:text="${unit.money}"></span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

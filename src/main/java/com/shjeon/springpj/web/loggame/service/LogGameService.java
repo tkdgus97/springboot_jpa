@@ -141,6 +141,7 @@ public class LogGameService {
         ModelMapper modelMapper = new ModelMapper();
         GenericUnit unit = null;
         int id = 0;
+
         if (user == null) {
             TempUser tempUser;
             Cookie[] cookies = req.getCookies();
@@ -150,7 +151,10 @@ public class LogGameService {
                     if (tempUser.getTempCharactor().getIdx() == idx) {
                         TempCharactor tempCharactor = tempUser.getTempCharactor();
                         id = tempCharactor.getIdx();
-                        unit = modelMapper.map(tempCharactor, GenericUnit.class);
+                        if (tempCharactor.getJob().equals("전사")) {
+                            unit = modelMapper.map(tempCharactor, Human.class);
+                        }
+//                        unit = modelMapper.map(tempCharactor, GenericUnit.class);
                     }
                 }
             }
@@ -160,7 +164,10 @@ public class LogGameService {
             for (CharacterInfo character: characterInfoList) {
                 if (character.getIdx() == idx) {
                     id = character.getIdx();
-                    unit = modelMapper.map(character, GenericUnit.class);
+                    if (character.getJob().equals("전사")) {
+                        unit = modelMapper.map(character, Human.class);
+                    }
+//                    unit = modelMapper.map(character, GenericUnit.class);
                 }
             }
         }

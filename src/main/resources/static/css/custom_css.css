@@ -67,3 +67,7 @@ body {
 .div-btn:active {
     box-shadow: none;
 }
+
+.pointer {
+    cursor: pointer;
+}

@@ -13,11 +13,22 @@
     </style>
 </head>
 <div layout:fragment="content">
-    <div class="row align-items-center justify-content-center m-0 mt-3" style="height: 40rem;">
-        <form id="boardForm" action="/board/add" method="post">
+    <div class="row align-items-center justify-content-center m-0 mt-3">
+        <form id="boardForm" action="/board/edit" method="post">
+            <input type="hidden" name="boardId" th:value="${board.boardId}">
             <div class="row m-0 mt-2 justify-content-center">
                 <div class="col-12 border-bottom border-secondary p-0">
-                    <input type="text" id="title" name="title" class="form-control border-0" style="font-size: 25px;" placeholder="제목을 입력하세요">
+                    <input type="text" id="title" name="title" class="form-control border-0" th:value="${board.title}" style="font-size: 25px;">
+                </div>
+            </div>
+            <div class="row m-0 mt-2 mb-4">
+                <div class="col-11 p-0 text-start">
+                    [[${#strings.substring(board.regDate,0,19)}]]
+                </div>
+                <div class="col-1 p-0 text-end">
+                    <a href="/board/remove">
+                        <img src="/image/trash.svg" style="width: 1.5rem;">
+                    </a>
                 </div>
             </div>
             <div class="row m-0 mt-4 justify-content-center">
@@ -32,9 +43,10 @@
             </div>
         </form>
     </div>
-    <script>
+    <script th:inline="javascript">
         $(document).ready(function () {
             var myClassEditor;
+            let data = [[${board.content}]];
             ClassicEditor
                 .create(document.querySelector("#editor"), {
                     language: "ko",
@@ -69,9 +81,7 @@
                 })
                 .then(editor => {
                     myClassEditor = editor;
-                    // console.log(myClassEditor.isReadOnly);
-                    // myClassEditor.enableReadOnlyMode("#editor");
-                    // console.log(myClassEditor.isReadOnly)
+                    myClassEditor.setData(data);
                 })
                 .catch(error => {
                     console.log(error);
